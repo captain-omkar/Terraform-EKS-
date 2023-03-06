@@ -1,9 +1,9 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "18.29.0"
+  version = "19.10.0"
 
   cluster_name    = var.cluster_name
-  cluster_version = "1.23"
+  cluster_version = "1.24"
 
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
@@ -34,17 +34,29 @@ module "eks" {
     
   }
 
-  node_security_group_additional_rules = {
+#   node_security_group_additional_rules = {
   
-  ingress_allow_access_from_control_plane = {
-    type                          = "ingress"
-    protocol                      = "tcp"
-    from_port                     = 9443
-    to_port                       = 9443
-    source_cluster_security_group = true
-    description                   = "Allow access from control plane to webhook port of AWS load balancer controller"
-  }
-}
+#   ingress_allow_access_from_control_plane = {
+#     type                          = "ingress"
+#     protocol                      = "tcp"
+#     from_port                     = 9443
+#     to_port                       = 9443
+#     source_cluster_security_group = true
+#     description                   = "Allow access from control plane to webhook port of AWS load balancer controller"
+#   }
+# }
+  
+#     node_security_group_additional_rules = {
+  
+#   ingress_allow_access_from_control_plane = {
+#     type                          = "ingress"
+#     protocol                      = "tcp"
+#     from_port                     = 15017
+#     to_port                       = 15017
+#     source_cluster_security_group = true
+#     description                   = "Allow access from control plane to istio webhook service"
+#   }
+# } 
 
   tags = {
     Environment = "staging"
